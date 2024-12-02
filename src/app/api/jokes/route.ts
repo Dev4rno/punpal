@@ -6,7 +6,11 @@ export async function GET() {
         const db = client.db("punpal");
         const jokesCollection = db.collection("jokes");
 
-        const randomJokes = await jokesCollection.aggregate([{ $sample: { size: 4 } }]).toArray();
+        const randomJokes = await jokesCollection
+            .aggregate([
+                { $sample: { size: 4 } }, // Ensures random sampling from the collection
+            ])
+            .toArray();
 
         return NextResponse.json(
             randomJokes.map((joke) => ({
