@@ -69,7 +69,9 @@ export default function JokeVoter({
                 <div className="text-center mt-8">
                     <p className="text-xl font-bold text-gray-700 dark:text-gray-200">Thank you for voting!</p>
                     <p className="text-lg text-gray-700 dark:text-gray-200 mt-2">
-                        {todayVoteCount === 0
+                        {typeof todayVoteCount === "undefined" || todayVoteCount === null
+                            ? null
+                            : todayVoteCount === 0
                             ? "You're the first voter of the day"
                             : `You've helped us reach ${todayVoteCount + 1} votes today`}
                         {" 🎉"}
