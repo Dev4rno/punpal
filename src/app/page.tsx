@@ -9,17 +9,14 @@ import { getRandomLoadingMessage } from "@/utils/str";
 export default async function Home() {
     const randomLoadingMessage = getRandomLoadingMessage();
     const todayVoteCount = await fetchTodayVoteCount();
+    const voteCount = todayVoteCount?.count ?? 0;
     const mostVotedJokes = await fetchMostVotedJokes();
     const randomJokes = await fetchRandomJokes();
     return (
         <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-1 sm:p-20">
             <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
                 <Banner />
-                <JokeVoter
-                    randomJokes={randomJokes}
-                    loadingMessage={randomLoadingMessage}
-                    todayVoteCount={todayVoteCount.count}
-                />
+                <JokeVoter randomJokes={randomJokes} loadingMessage={randomLoadingMessage} todayVoteCount={voteCount} />
                 <MostPopular mostVotedJokes={mostVotedJokes} />
                 <Footer />
             </main>
