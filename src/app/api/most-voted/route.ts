@@ -15,7 +15,7 @@ export async function GET() {
                     },
                 },
                 {
-                    $sort: { voteCount: -1 }, // Sort by most popular
+                    $sort: { voteCount: -1, lastVotedAt: -1 }, // Sort by most popular and then date
                 },
                 {
                     $limit: 10, // Limit to top 10
