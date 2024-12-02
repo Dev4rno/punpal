@@ -6,16 +6,37 @@ export async function GET() {
         const db = client.db("punpal");
         const jokesCollection = db.collection("jokes");
 
+        // Aggregation pipeline using $rand to select 4 random jokes
         const randomJokes = await jokesCollection
             .aggregate([
-                { $sample: { size: 4 } }, // Ensures random sampling from the collection
+                {
+                    $match: {}, // Match all jokes (can be modified if you want to filter)
+                },
+                {
+                    $addFields: {
+                        random: { $rand: {} }, // Adding a random field to each document
+                    },
+                },
+                {
+                    $sort: { random: 1 }, // Sorting by the random field to shuffle the documents
+                },
+                {
+                    $limit: 4, // Limiting to 4 random jokes
+                },
+                {
+                    $project: {
+                        jokeId: "$_id", // Returning the joke ID
+                        jokeText: "$text", // Returning the joke text
+                    },
+                },
             ])
             .toArray();
 
+        // Return the random jokes as JSON
         return NextResponse.json(
             randomJokes.map((joke) => ({
-                jokeId: joke._id.toString(),
-                jokeText: joke.text,
+                jokeId: joke.jokeId.toString(), // Converting _id to string
+                jokeText: joke.jokeText, // Joke text
             }))
         );
     } catch (error) {
