@@ -12,6 +12,7 @@ export async function POST(req: Request) {
         await db.collection("votes").insertOne(vote);
         return NextResponse.json({ message: "Vote recorded" }, { status: 201 });
     } catch (error) {
+        console.error({ error });
         return NextResponse.json({ error: "Failed to record vote" }, { status: 500 });
     }
 }
