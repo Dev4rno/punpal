@@ -35,7 +35,6 @@ export default function JokeVoter({
                         {randomJokes?.map((joke) => {
                             const jokeParts = splitJoke(joke.jokeText);
                             const isOneLiner = jokeParts.length === 1;
-
                             const jokeElement = isOneLiner ? (
                                 <h6 className="text-lg text-center dark:text-white">{jokeParts[0]}</h6>
                             ) : (
@@ -44,14 +43,15 @@ export default function JokeVoter({
                                     <p className="text-lg text-center punchline blue2-text">{jokeParts[1]}</p>
                                 </>
                             );
+
                             return (
                                 <button
                                     key={joke.jokeId}
                                     className="bg-gray-200 dark:bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 text-left card-voter"
                                     onClick={async () => {
                                         try {
-                                            const { message } = await handleVote({ jokeId: joke.jokeId });
-                                            if (message) {
+                                            const response = await handleVote({ jokeId: joke.jokeId });
+                                            if (response && response.message) {
                                                 setVoted(true);
                                             }
                                         } catch (error) {
@@ -69,8 +69,8 @@ export default function JokeVoter({
                 <div className="text-center mt-8">
                     <p className="text-xl font-bold text-gray-700 dark:text-gray-200">Thank you for voting!</p>
                     <p className="text-lg text-gray-700 dark:text-gray-200 mt-2">
-                        {typeof todayVoteCount === "undefined" || todayVoteCount === null
-                            ? null
+                        {typeof todayVoteCount === "undefined"
+                            ? ""
                             : todayVoteCount === 0
                             ? "You're the first voter of the day"
                             : `You've helped us reach ${todayVoteCount + 1} votes today`}

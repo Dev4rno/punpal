@@ -6,7 +6,8 @@ interface Joke {
 }
 
 interface VoteResponse {
-    message: string;
+    message?: string;
+    error?: string;
 }
 
 interface VoteCountResponse {
@@ -45,14 +46,14 @@ export async function handleVote({ jokeId }: { jokeId: string }): Promise<VoteRe
             body: JSON.stringify({ jokeId }),
         };
         const response = await fetch(url, params);
-        logResponse("handleVote", url, response);
-        if (!response.ok) throw new Error("Failed to vote");
-
+        if (!response.ok) {
+            throw new Error("Failed to vote");
+        }
         const data: VoteResponse = await response.json();
-        console.log("[handleVote] Data:", data);
         return data;
     } catch (err) {
-        logError("handleVote", err);
+        console.error({ err });
+        return { error: String(err) };
     }
 }
 
