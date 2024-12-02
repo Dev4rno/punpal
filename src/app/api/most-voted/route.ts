@@ -15,7 +15,7 @@ export async function GET() {
                     },
                 },
                 {
-                    $sort: { voteCount: -1, lastVotedAt: -1 }, // First by voteCount, then by lastVotedAt for ties
+                    $sort: { voteCount: -1 },
                 },
                 {
                     $limit: 10, // Limit to top 10
