@@ -3,19 +3,74 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+    --background: #f5f5f5;
+    --foreground: #171717;
+    --blue-1: #1e90ff;
+    --blue-2: #82bbf2;
+    --green-1: #26de81;
+    --green-2: #8eeabb;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+    :root {
+        --background: #0a0a0a;
+        --foreground: #ededed;
+        --blue-1: #1e90ff;
+        --blue-2: #82bbf2;
+        --green-1: #26de81;
+        --green-2: #8eeabb;
+    }
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+    color: var(--foreground);
+    background: var(--background);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.card {
+    border-radius: 8px;
+    padding: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-voter {
+    border: 2px solid transparent;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-voter:hover {
+    border-color: var(--blue-1);
+    box-shadow: 2px 2px 2px 2px rgba(30, 144, 255, 0.5);
+}
+
+.card-most-voted {
+    border: 2px solid var(--green-1);
+    box-shadow: #8eeabb 0px 3px 8px;
+}
+
+.punchline {
+    font-weight: bold;
+}
+
+.green1-text {
+    color: var(--green-1);
+}
+
+.green2-text {
+    color: var(--green-2);
+}
+
+.blue1-text {
+    color: var(--blue-1);
+}
+
+.blue2-text {
+    color: var(--blue-2);
+}
+
+.reload-btn {
+    background-color: var(--blue-1);
+    font-weight: 500;
+    letter-spacing: 0.05rem;
 }
