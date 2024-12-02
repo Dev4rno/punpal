@@ -19,11 +19,17 @@ export default function JokeVoter({
     randomJokes: Joke[];
 }) {
     const [loading, setLoading] = useState(true);
+    const [voting, setVoting] = useState(false);
     const [voted, setVoted] = useState(false);
+
     useEffect(() => {
         if (randomJokes) setLoading(false);
     }, [randomJokes]);
-    if (loading) return <p className="text-xl text-center text-gray-700 dark:text-gray-300">{loadingMessage}</p>;
+
+    if (loading) {
+        return <p className="text-xl text-center text-gray-700 dark:text-gray-300">{loadingMessage}</p>;
+    }
+
     return (
         <div className="w-full">
             {!voted ? (
@@ -47,8 +53,11 @@ export default function JokeVoter({
                             return (
                                 <button
                                     key={joke.jokeId}
-                                    className="bg-gray-200 dark:bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 text-left card-voter"
+                                    className={`bg-gray-200 dark:bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 text-left card-voter ${
+                                        voting ? "opacity-50 pointer-events-none" : ""
+                                    }`}
                                     onClick={async () => {
+                                        setVoting(true); // Show loading state
                                         try {
                                             const response = await handleVote({ jokeId: joke.jokeId });
                                             if (response && response.message) {
@@ -56,6 +65,8 @@ export default function JokeVoter({
                                             }
                                         } catch (error) {
                                             console.error(error);
+                                        } finally {
+                                            setVoting(false); // Remove loading state
                                         }
                                     }}
                                 >
@@ -64,6 +75,11 @@ export default function JokeVoter({
                             );
                         })}
                     </div>
+                    {voting && (
+                        <p className="text-center mt-4 text-lg text-gray-700 dark:text-gray-300">
+                            Casting your vote, please wait...
+                        </p>
+                    )}
                 </>
             ) : (
                 <div className="text-center mt-8">
