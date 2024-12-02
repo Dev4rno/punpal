@@ -7,16 +7,19 @@ import { useEffect, useState } from "react";
 interface Joke {
     jokeId: string;
     jokeText: string;
-    voteCount: number;
-    lastVotedAt: string;
+    voteCount?: number;
+    lastVotedAt?: string;
 }
 
 export default function MostPopular({ mostVotedJokes }: { mostVotedJokes: Joke[] }) {
     const [loading, setLoading] = useState(true);
+
     useEffect(() => {
         if (mostVotedJokes) setLoading(false);
     }, [mostVotedJokes]);
-    if (loading) return null;
+
+    if (loading) return <></>;
+
     return mostVotedJokes.length ? (
         <div className="w-full">
             <h2 className="text-2xl font-bold text-center mb-6 vote-count">
@@ -34,7 +37,18 @@ export default function MostPopular({ mostVotedJokes }: { mostVotedJokes: Joke[]
                             <p className="text-lg text-center punchline green2-text">{jokeParts[1]}</p>
                         </>
                     );
-                    const mostRecent = formatDistanceToNow(joke.lastVotedAt).replace("about", "");
+
+                    // Ensure lastVotedAt is parsed correctly
+                    let mostRecent;
+                    try {
+                        mostRecent = joke.lastVotedAt
+                            ? formatDistanceToNow(new Date(joke.lastVotedAt)).replace("about", "")
+                            : "";
+                    } catch (error) {
+                        console.error(`Error formatting date for joke ${joke.jokeId}:`, error);
+                        mostRecent = "unknown time";
+                    }
+
                     return (
                         <div
                             key={joke.jokeId}
@@ -50,5 +64,9 @@ export default function MostPopular({ mostVotedJokes }: { mostVotedJokes: Joke[]
                 })}
             </div>
         </div>
-    ) : null;
+    ) : (
+        <div className="text-center">
+            <p>No popular jokes available at the moment.</p>
+        </div>
+    );
 }
