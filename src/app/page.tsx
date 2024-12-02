@@ -1,4 +1,3 @@
-// src/app/page.tsx
 import { fetchMostVotedJokes, fetchRandomJokes, fetchTodayVoteCount } from "@/actions";
 import Banner from "@/components/Banner";
 import { Footer } from "@/components/Footer";
