@@ -1,5 +1,6 @@
 interface Joke {
-    _id: string;
-    text: string;
-    voteCount: number;
+    jokeId: string;
+    jokeText: string;
+    _id?: string; // Optional or required based on your actual data structure
+    voteCount?: number; // If you have this field in your joke data
 }
