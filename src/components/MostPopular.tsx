@@ -22,8 +22,6 @@ export default function MostPopular({ mostVotedJokes, loading }: { mostVotedJoke
                             <p className="text-lg text-center punchline green2-text">{jokeParts[1]}</p>
                         </>
                     );
-
-                    // Ensure lastVotedAt is parsed correctly
                     let mostRecent;
                     try {
                         mostRecent = joke.lastVotedAt
@@ -33,7 +31,6 @@ export default function MostPopular({ mostVotedJokes, loading }: { mostVotedJoke
                         console.error(`Error formatting date for joke ${joke.jokeId}:`, error);
                         mostRecent = "unknown time";
                     }
-
                     return (
                         <div
                             key={joke.jokeId}
