@@ -4,11 +4,6 @@ import { handleVote } from "@/actions";
 import { splitJoke } from "@/utils/str";
 import { useState } from "react";
 
-interface Joke {
-    jokeId: string;
-    jokeText: string;
-}
-
 export default function JokeVoter({
     todayVoteCount,
     loadingMessage,
@@ -52,7 +47,7 @@ export default function JokeVoter({
                                         voting ? "opacity-50 pointer-events-none" : ""
                                     }`}
                                     onClick={async () => {
-                                        setVoting(true); // Show loading state
+                                        setVoting(true);
                                         try {
                                             const response = await handleVote({ jokeId: joke.jokeId });
                                             if (response && response.message) {
@@ -61,7 +56,7 @@ export default function JokeVoter({
                                         } catch (error) {
                                             console.error(error);
                                         } finally {
-                                            setVoting(false); // Remove loading state
+                                            setVoting(false);
                                         }
                                     }}
                                 >
