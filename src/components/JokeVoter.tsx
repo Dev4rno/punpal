@@ -2,7 +2,7 @@
 
 import { handleVote } from "@/actions";
 import { splitJoke } from "@/utils/str";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 interface Joke {
     jokeId: string;
@@ -13,23 +13,18 @@ export default function JokeVoter({
     todayVoteCount,
     loadingMessage,
     randomJokes,
+    loading,
 }: {
     todayVoteCount: number;
     loadingMessage: string;
     randomJokes: Joke[];
+    loading: boolean;
 }) {
-    const [loading, setLoading] = useState(true);
     const [voting, setVoting] = useState(false);
     const [voted, setVoted] = useState(false);
-
-    useEffect(() => {
-        if (randomJokes) setLoading(false);
-    }, [randomJokes]);
-
     if (loading) {
         return <p className="text-xl text-center text-gray-700 dark:text-gray-300">{loadingMessage}</p>;
     }
-
     return (
         <div className="w-full">
             {!voted ? (

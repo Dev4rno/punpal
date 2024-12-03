@@ -34,38 +34,40 @@ import { useEffect, useState } from "react";
 
 export default function Home() {
     const [randomLoadingMessage, setRandomLoadingMessage] = useState<string>("");
-
-    // State hooks to store data
     const [voteCount, setVoteCount] = useState<number>(0);
     const [mostVotedJokes, setMostVotedJokes] = useState<Joke[]>([]);
     const [randomJokes, setRandomJokes] = useState<Joke[]>([]);
-
+    const [loading, setLoading] = useState(true);
     useEffect(() => {
-        setRandomLoadingMessage(getRandomLoadingMessage()); // Set the loading message only on the client
-
-        const loadData = async () => {
+        setRandomLoadingMessage(getRandomLoadingMessage());
+        async function fetchDefaultData() {
             try {
+                setLoading(true);
                 const todayVoteCount = await fetchTodayVoteCount();
                 const mostVotedJokesData = await fetchMostVotedJokes();
                 const randomJokesData = await fetchRandomJokes();
-
                 setVoteCount(todayVoteCount?.count ?? 0);
                 setMostVotedJokes(mostVotedJokesData ?? []);
                 setRandomJokes(randomJokesData ?? []);
             } catch (error) {
                 console.error("Error loading data", error);
+            } finally {
+                setLoading(false);
             }
-        };
-
-        loadData();
+        }
+        fetchDefaultData();
     }, []);
-
     return (
         <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-1 sm:p-20">
             <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
                 <Banner />
-                <JokeVoter randomJokes={randomJokes} loadingMessage={randomLoadingMessage} todayVoteCount={voteCount} />
-                <MostPopular mostVotedJokes={mostVotedJokes} />
+                <JokeVoter
+                    randomJokes={randomJokes}
+                    loading={loading}
+                    loadingMessage={randomLoadingMessage}
+                    todayVoteCount={voteCount}
+                />
+                <MostPopular mostVotedJokes={mostVotedJokes} loading={loading} /> {/* Pass loading to MostPopular */}
                 <Footer />
             </main>
         </div>
