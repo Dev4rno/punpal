@@ -35,7 +35,6 @@ export const metadata: Metadata = {
     //     images: [{url: ""}],
     //     siteName: "PunPal",
     // },
-
     // twitter: {
     //     card: "summary_large_image",
     //     title: "PunPal",
