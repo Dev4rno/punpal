@@ -82,14 +82,19 @@ export default function JokeVoter({
                             : `You've helped us reach ${todayVoteCount + 1} votes today`}
                         {" 🎉"}
                     </p>
-                    <button
-                        onClick={() => window.location.reload()}
-                        className="mt-6 px-4 py-2 text-white rounded-md hover:bg-blue-600 transition text-lg reload-btn"
-                    >
-                        Give Me More
-                    </button>
                 </div>
             )}
+            <div className="w-full flex items-center justify-center">
+                <button
+                    onClick={() => window.location.reload()}
+                    className="mt-8 rounded-md px-5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-[#1e90ff] text-[#1e90ff] text-white"
+                >
+                    <span className="absolute w-64 h-0 transition-all duration-300 origin-center rotate-45 -translate-x-20 bg-[#1e90ff] top-1/2 group-hover:h-64 group-hover:-translate-y-32 ease"></span>
+                    <span className="text-lg relative text-[#1e90ff] transition duration-300 group-hover:text-white ease">
+                        Give Me More
+                    </span>
+                </button>
+            </div>
         </div>
     );
 }
