@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export const Footer = () => {
     return (
-        <footer className="w-full mt-10 flex-column justify-center items-center text-white opacity-85 border-2 border-red-500">
+        <footer className="w-full mt-10 flex-column justify-center items-center text-white opacity-85">
             <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
                 {/* Products */}
                 <div className="text-center">
