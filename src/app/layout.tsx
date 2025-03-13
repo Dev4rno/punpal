@@ -28,10 +28,10 @@ const APP_DESCRIPTION =
 
 // Asset paths
 const ASSETS = {
-    logo: "/assets/punpal-logo.png",
+    logo: "/punpal-logo.png",
     favicon: "/favicon.ico",
-    // svg: "/assets/punpal-logo.svg",
-    banner: "/assets/og-image.png",
+    // svg: "/punpal-logo.svg",
+    banner: "/og-image.png",
 };
 
 // Set the base URL for metadata generation

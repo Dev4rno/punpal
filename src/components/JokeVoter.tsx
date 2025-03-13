@@ -17,8 +17,12 @@ export default function JokeVoter({
 }) {
     const [voting, setVoting] = useState(false);
     const [voted, setVoted] = useState(false);
-    if (loading) {
-        return <p className="text-xl text-center text-gray-700 dark:text-gray-300">{loadingMessage}</p>;
+    if (loading || !randomJokes) {
+        return (
+            <div className="w-full flex items-center justify-center">
+                <p className="text-xl text-center text-gray-700 dark:text-gray-300">{loadingMessage}</p>
+            </div>
+        );
     }
     return (
         <div className="w-full">
@@ -28,7 +32,7 @@ export default function JokeVoter({
                         Pick Your <span className="blue1-text">Favourite</span> Pun
                     </h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-                        {randomJokes?.map((joke) => {
+                        {randomJokes.map((joke) => {
                             const jokeParts = splitJoke(joke.jokeText);
                             const isOneLiner = jokeParts.length === 1;
                             const jokeElement = isOneLiner ? (
