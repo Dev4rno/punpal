@@ -43,6 +43,8 @@ const KEYWORDS = [
     "jokes",
     "funny jokes",
     "joke battles",
+    "funny puns",
+    "puns",
     "pun battles",
     "live joke leaderboard",
     "joke competition",

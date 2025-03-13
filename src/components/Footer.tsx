@@ -20,12 +20,12 @@ export const Footer = () => {
                         </li>
                         <li>
                             <a
-                                href="https://jumblr.fun?utm_source=punpal&utm_medium=referral&utm_campaign=footer_cross_promotion&utm_content=site_footer"
+                                href="https://pwplz.com?utm_source=punpal&utm_medium=referral&utm_campaign=footer_cross_promotion&utm_content=site_footer"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="hover:text-blue-300"
                             >
-                                Reading Challenge
+                                Free Passwords
                             </a>
                         </li>
                         <li>
@@ -40,12 +40,12 @@ export const Footer = () => {
                         </li>
                         <li>
                             <a
-                                href="https://punpal.net?utm_source=punpal&utm_medium=referral&utm_campaign=footer_cross_promotion&utm_content=site_footer"
+                                href="https://jumblr.fun?utm_source=punpal&utm_medium=referral&utm_campaign=footer_cross_promotion&utm_content=site_footer"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="hover:text-blue-300"
                             >
-                                Joke Battles
+                                Reading Challenge
                             </a>
                         </li>
                     </ul>
